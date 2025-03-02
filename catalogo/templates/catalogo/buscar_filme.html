@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Filme por ID</title>
+</head>
+<body>
+    <h1>Buscar Filme por ID</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="imdb_id" placeholder="Digite o ID do filme (ex: tt3896198)" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if mensagem %}
+        <p>{{ mensagem }}</p>
+    {% endif %}
+
+    {% if dados_filme %}
+        <h2>{{ dados_filme.Title }} ({{ dados_filme.Year }})</h2>
+        <p><strong>Diretor:</strong> {{ dados_filme.Director }}</p>
+        <p><strong>Atores:</strong> {{ dados_filme.Actors }}</p>
+        <p><strong>Sinopse:</strong> {{ dados_filme.Plot }}</p>
+        <p><strong>Poster:</strong> <img src="{{ dados_filme.Poster }}" alt="{{ dados_filme.Title }}"></p>
+    {% endif %}
+</body>
+</html>
